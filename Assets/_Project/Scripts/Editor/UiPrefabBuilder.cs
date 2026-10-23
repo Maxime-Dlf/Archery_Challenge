@@ -329,10 +329,11 @@ namespace ArcheryChallenge.EditorTools
             UiFactory.Toggle(comfort, "ToggleSnapTurn", "Rotation par pas de 45°", 520, 70, 440, 56);
             UiFactory.Toggle(comfort, "ToggleAutoNock", "Encochage automatique", 60, 140, 440, 56);
             UiFactory.Toggle(comfort, "ToggleBowLeftHand", "Arc dans la main gauche", 520, 140, 440, 56);
-            UiFactory.Text(comfort, "MoveSpeedLabel", "Vitesse de marche", 30, Ink, 60, 220, 330, 50, TextAlignmentOptions.MidlineLeft);
-            UiFactory.Slider(comfort, "SliderMoveSpeed", 400, 226, 500, 40);
-            UiFactory.Text(comfort, "SeatedLabel", "Hauteur (assis)", 30, Ink, 60, 290, 330, 50, TextAlignmentOptions.MidlineLeft);
-            UiFactory.Slider(comfort, "SliderSeatedHeight", 400, 296, 500, 40);
+            UiFactory.Toggle(comfort, "ToggleContinuousMove", "Déplacement continu (sinon téléportation au stick gauche)", 60, 210, 900, 56);
+            UiFactory.Text(comfort, "MoveSpeedLabel", "Vitesse de marche", 30, Ink, 60, 290, 330, 50, TextAlignmentOptions.MidlineLeft);
+            UiFactory.Slider(comfort, "SliderMoveSpeed", 400, 296, 500, 40);
+            UiFactory.Text(comfort, "SeatedLabel", "Hauteur (assis)", 30, Ink, 60, 360, 330, 50, TextAlignmentOptions.MidlineLeft);
+            UiFactory.Slider(comfort, "SliderSeatedHeight", 400, 366, 500, 40);
             Back(comfort);
 
             // --- Jour et nuit ---
@@ -533,7 +534,7 @@ namespace ArcheryChallenge.EditorTools
                 "3. Approchez la flèche de la corde : elle s'encoche.\n" +
                 "4. Reculez la main en gardant le Grip : la corde se tend.\n" +
                 "5. Relâchez le Grip : la flèche part !\n" +
-                "Stick gauche : marcher · stick droit : tourner / se téléporter.",
+                "Stick gauche : se téléporter (viser, relâcher) · stick droit : tourner.",
                 25, Ink, 40, 128, 460, 440);
             UiFactory.Text(root, "PcTitle", "Au clavier et à la souris", 36, UiFactory.Forest, 520, 80, 440, 44, TextAlignmentOptions.TopLeft, FontStyles.Bold);
             UiFactory.Text(root, "PcText",

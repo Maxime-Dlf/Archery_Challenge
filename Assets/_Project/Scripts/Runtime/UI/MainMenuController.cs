@@ -9,7 +9,7 @@
 //   Page_Difficulty BtnEasy, BtnNormal, BtnHard, DifficultyDescription
 //   Page_Equipment BowName, BowStats, BowPrev, BowNext, ArrowName, ArrowStats, ArrowPrev, ArrowNext
 //   Page_Volume    SliderMaster, SliderMusic, SliderSfx, SliderAmbience, SliderUi (+ MasterValue … textes)
-//   Page_Comfort   ToggleVignette, ToggleSnapTurn, ToggleAutoNock, ToggleBowLeftHand, SliderMoveSpeed, SliderSeatedHeight
+//   Page_Comfort   ToggleVignette, ToggleSnapTurn, ToggleAutoNock, ToggleBowLeftHand, ToggleContinuousMove, SliderMoveSpeed, SliderSeatedHeight
 //   Page_Time      ToggleCycle, ToggleFixedHour, BtnHourMinus, BtnHourPlus, HourLabel
 //   Page_Profile   ProfileLabel, BtnChangeProfile, BtnSaveNow
 //
@@ -40,7 +40,7 @@ namespace ArcheryChallenge.UI
         // Éléments
         private TMP_Text difficultyDescription, bowName, bowStats, arrowName, arrowStats, hourLabel, profileLabel;
         private Slider sMaster, sMusic, sSfx, sAmbience, sUi, sMoveSpeed, sSeated;
-        private Toggle tVignette, tSnap, tAutoNock, tLeft, tCycle, tFixed;
+        private Toggle tVignette, tSnap, tAutoNock, tLeft, tContinuous, tCycle, tFixed;
         private Button bEasy, bNormal, bHard;
 
         protected override void Awake()
@@ -117,6 +117,7 @@ namespace ArcheryChallenge.UI
             tSnap = BindToggle("ToggleSnapTurn", v => Edit(d => d.snapTurn = v));
             tAutoNock = BindToggle("ToggleAutoNock", v => Edit(d => d.autoNock = v));
             tLeft = BindToggle("ToggleBowLeftHand", v => Edit(d => d.bowInLeftHand = v));
+            tContinuous = BindToggle("ToggleContinuousMove", v => Edit(d => d.continuousMove = v));
             sMoveSpeed = BindSlider("SliderMoveSpeed", v => Edit(d => d.moveSpeed = Mathf.Lerp(0.5f, 6f, v)));
             sSeated = BindSlider("SliderSeatedHeight", v => Edit(d => d.seatedHeightOffset = Mathf.Lerp(-0.5f, 0.5f, v)));
 
@@ -225,6 +226,7 @@ namespace ArcheryChallenge.UI
             if (tSnap != null) tSnap.SetIsOnWithoutNotify(d.snapTurn);
             if (tAutoNock != null) tAutoNock.SetIsOnWithoutNotify(d.autoNock);
             if (tLeft != null) tLeft.SetIsOnWithoutNotify(d.bowInLeftHand);
+            if (tContinuous != null) tContinuous.SetIsOnWithoutNotify(d.continuousMove);
             if (tCycle != null) tCycle.SetIsOnWithoutNotify(d.dayNightCycleActive);
             if (tFixed != null) tFixed.SetIsOnWithoutNotify(d.fixedHour >= 0f);
             syncing = false;

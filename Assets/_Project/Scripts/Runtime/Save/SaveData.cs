@@ -37,6 +37,12 @@ namespace ArcheryChallenge.Save
         public float snapTurnAngle = 45f;
         public float moveSpeed = 4f;
 
+        /// <summary>
+        /// Faux (défaut) : le stick gauche téléporte (pousser vers l'avant, viser avec le laser, relâcher). Vrai : déplacement continu
+        /// au stick gauche (avec la vitesse « moveSpeed »). Voir ComfortSettingsApplier.
+        /// </summary>
+        public bool continuousMove;
+
         /// <summary>0 = pas encore migré (anciens fichiers : marche à 2 m/s) ; 1 = sprint par défaut (4 m/s). Voir SettingsService.Sanitize.</summary>
         public int speedProfile = 0;
         public float seatedHeightOffset = 0f;

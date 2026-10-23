@@ -66,6 +66,16 @@ namespace ArcheryChallenge.Tests
         // ---------------------------------------------------------------- JSON
 
         [Test]
+        public void LeftStickTeleportsByDefaultAndContinuousMoveIsAnOption()
+        {
+            // Le stick gauche téléporte (laser) au départ ; le déplacement continu se règle dans le menu Confort et se sauvegarde.
+            Assert.IsFalse(new SettingsData().continuousMove);
+            SettingsData data = new SettingsData { continuousMove = true };
+            Assert.IsTrue(JsonFileStore.Write("settings.json", data));
+            Assert.IsTrue(JsonFileStore.Read<SettingsData>("settings.json").continuousMove);
+        }
+
+        [Test]
         public void BowIsInTheRightHandByDefault()
         {
             // Arc à droite, flèches à gauche : l'option « Arc dans la main gauche » est décochée au départ.

@@ -34,11 +34,11 @@ namespace ArcheryChallenge.UI
         /// <summary>Commandes de jeu (toutes versions).</summary>
         public static readonly ControlEntry[] Game =
         {
-            new ControlEntry("Se déplacer (allure rapide)", "Z Q S D  (ou W A S D)", "Stick gauche (sprint par défaut)"),
+            new ControlEntry("Se déplacer (allure rapide)", "Z Q S D  (ou W A S D)", "Stick gauche : téléportation (marche : option Confort)"),
             new ControlEntry("Regarder / tourner", "Souris", "Tourner la tête · stick droit (pas de 45°)"),
             new ControlEntry("Marcher doucement", "Maj (maintenu)", "Régler la vitesse : Réglages"),
             new ControlEntry("Sauter", "Espace", "—"),
-            new ControlEntry("Se téléporter", "T (voyage rapide)", "Stick droit vers l'avant, viser, relâcher"),
+            new ControlEntry("Se téléporter", "T (voyage rapide)", "Stick gauche ou droit vers l'avant, viser, relâcher"),
             new ControlEntry("Prendre l'arc", "Automatique (arc équipé)", "Main d'arc (droite) près de l'épaule + Grip"),
             new ControlEntry("Prendre une flèche", "R (prend et encoche)", "Main libre dans le dos + Grip"),
             new ControlEntry("Encocher", "Automatique avec R", "Approcher la flèche de la corde"),
@@ -75,7 +75,8 @@ namespace ArcheryChallenge.UI
         /// </summary>
         public static readonly ControlEntry[] VrGameplay =
         {
-            new ControlEntry("Se déplacer", "Stick gauche", "Allure rapide (sprint) par défaut"),
+            new ControlEntry("Se téléporter", "Stick gauche vers l'avant", "Viser le sol avec le laser, relâcher"),
+            new ControlEntry("Marche continue", "Menu → Réglages → Confort", "Stick gauche : marcher (sprint par défaut)"),
             new ControlEntry("Tourner", "Stick droit ← →", "Pas de 45° · ou tourner la tête"),
             new ControlEntry("Voyage rapide", "Bouton Y (main gauche)", "Ouvre la liste des lieux"),
             new ControlEntry("Menu / pause", "Bouton Menu (main gauche)", "Reprendre : la croix X"),

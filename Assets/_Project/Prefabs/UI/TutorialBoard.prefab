@@ -555,11 +555,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1. Main pr\xE8s de l'\xE9paule gauche + Grip : l'arc arrive dans la main.\n2.
+  m_text: "1. Main droite pr\xE8s de l'\xE9paule + Grip : l'arc arrive dans la main.\n2.
     Autre main dans le dos + Grip : une fl\xE8che appara\xEEt.\n3. Approchez la fl\xE8che
     de la corde : elle s'encoche.\n4. Reculez la main en gardant le Grip : la corde
-    se tend.\n5. Rel\xE2chez le Grip : la fl\xE8che part !\nStick gauche : marcher
-    \xB7 stick droit : tourner / se t\xE9l\xE9porter."
+    se tend.\n5. Rel\xE2chez le Grip : la fl\xE8che part !\nStick gauche : se t\xE9l\xE9porter (viser, rel\xE2cher) \xB7 stick droit : tourner."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7cad74a9048481f438ccaed0462b93f5, type: 2}
   m_sharedMaterial: {fileID: -1224603437709558952, guid: 7cad74a9048481f438ccaed0462b93f5, type: 2}
