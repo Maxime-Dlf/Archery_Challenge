@@ -496,14 +496,10 @@ namespace ArcheryChallenge.EditorTools
             platform.GetComponent<Renderer>().sharedMaterial = wood;
             platform.AddComponent<SurfaceTag>().Surface = SurfaceType.Wood;
 
-            GameObject anchor = BuildUtils.Child(root.transform, "TeleportAnchor", new Vector3(0f, 0.3f, -0.5f));
-            BoxCollider anchorCollider = anchor.AddComponent<BoxCollider>();
-            anchorCollider.size = new Vector3(1f, 0.05f, 1f);
-            anchorCollider.isTrigger = true;
-            TeleportationAnchor teleport = anchor.AddComponent<TeleportationAnchor>();
-            teleport.teleportAnchorTransform = anchor.transform;
-            teleport.matchOrientation = MatchOrientation.TargetUpAndForward;
-            teleport.interactionLayers = UnityEngine.XR.Interaction.Toolkit.InteractionLayerMask.GetMask("Teleport");
+            // Point d'arrivée de la téléportation (simple repère) ; c'est l'estrade entière qui sert d'ancre au laser.
+            // Voir ArenaTeleportSurface : une ancre en collider « trigger » est invisible pour le laser de téléportation.
+            BuildUtils.Child(root.transform, "TeleportAnchor", new Vector3(0f, 0.3f, -0.5f));
+            ArenaTeleportSurface.Ensure(root.transform);
 
             GameObject bounds = BuildUtils.Child(root.transform, "Bounds");
             BoxCollider boundsBox = bounds.AddComponent<BoxCollider>();

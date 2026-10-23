@@ -124,6 +124,8 @@ namespace ArcheryChallenge.Levels
             if (targets.Count == 0 && targetsRoot != null)
                 CollectTargets();
             waves = GetComponent<TargetWaveSpawner>();
+            // L'estrade entière est une ancre de téléportation (le laser ignore les triggers : voir ArenaTeleportSurface).
+            ArenaTeleportSurface.Ensure(transform);
         }
 
         private void OnEnable()

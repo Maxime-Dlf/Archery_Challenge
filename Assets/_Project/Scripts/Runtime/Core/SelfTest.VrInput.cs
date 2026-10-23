@@ -379,6 +379,142 @@ namespace ArcheryChallenge.Core
                 xr.LeftHand != null ? xr.LeftHand.GetComponentInChildren<UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ControllerInputActionManager>(true) : null;
             Check(comfort != null && !comfort.Data.continuousMove, "Par défaut, le déplacement continu est désactivé (le stick gauche téléporte)");
             Check(leftManager != null && !leftManager.smoothMotionEnabled, "Manette gauche : téléportation active, marche continue coupée");
+
+            // --- 2a. Téléportation au stick gauche : pousser, viser le sol (laser vert), relâcher → le joueur se déplace ---
+            UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor teleportRay = null;
+            if (xr.LeftHand != null)
+                foreach (UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor candidate in xr.LeftHand.GetComponentsInChildren<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>(true))
+                    if (candidate.name.Contains("Teleport"))
+                        teleportRay = candidate;
+            Check(teleportRay != null, "Le laser de téléportation existe sur la manette gauche");
+            if (teleportRay != null)
+            {
+                int environmentLayer = LayerMask.NameToLayer("Environment");
+                Check((teleportRay.raycastMask.value & (1 << environmentLayer)) != 0, "Le rayon de téléportation touche le calque Environment (terrain)");
+
+                Vector3 teleportStart = mode.XrRig.transform.position;
+                leftState.deviceRotation = Quaternion.Euler(8f, 0f, 0f);          // visée presque horizontale : la courbe retombe quelques mètres devant
+                leftState.primary2DAxis = new Vector2(0f, 1f);                      // stick poussé vers l'avant
+                bool shown = false, hovering = false, hitTerrain = false;
+                string hitName = "aucun";
+                for (int i = 0; i < 40; i++)
+                {
+                    PushSimStates();
+                    yield return null;
+                    shown |= teleportRay.gameObject.activeInHierarchy;
+                    if (teleportRay.gameObject.activeInHierarchy)
+                    {
+                        hovering |= teleportRay.interactablesHovered.Count > 0;
+                        if (teleportRay.TryGetCurrent3DRaycastHit(out RaycastHit teleportHit))
+                        {
+                            hitName = teleportHit.collider.name + " (" + LayerMask.LayerToName(teleportHit.collider.gameObject.layer) + ")";
+                            hitTerrain |= teleportHit.collider is TerrainCollider;
+                        }
+                    }
+                }
+                Check(shown, "Stick gauche poussé : le laser de téléportation apparaît");
+                Check(hitTerrain, $"Le laser touche le terrain (dernier impact : {hitName})");
+                Check(hovering, "Le laser vise une zone de téléportation valide (couleur « valide », plus rouge)");
+
+                leftState.primary2DAxis = Vector2.zero;                               // stick relâché : téléportation
+                for (int i = 0; i < 30; i++)
+                {
+                    PushSimStates();
+                    yield return null;
+                }
+                yield return new WaitForSeconds(0.5f);
+                float teleported = Vector3.Distance(new Vector3(teleportStart.x, 0f, teleportStart.z), new Vector3(mode.XrRig.transform.position.x, 0f, mode.XrRig.transform.position.z));
+                Check(teleported > 1.5f, $"Relâcher le stick téléporte le joueur ({teleported:0.0} m, de {teleportStart} à {mode.XrRig.transform.position})");
+                leftState.deviceRotation = Quaternion.identity;
+                mode.TeleportToSpawn("camp");
+                for (int i = 0; i < 20; i++)
+                {
+                    PushSimStates();
+                    yield return null;
+                }
+
+                // --- 2b. Estrade d'arène : arriver devant, viser l'estrade au laser, relâcher → on se retrouve dessus, face aux cibles ---
+                ArcheryChallenge.World.FastTravelService travel = Services.Get<ArcheryChallenge.World.FastTravelService>();
+                Check(travel != null, "Le voyage rapide est disponible pour le test de l'estrade");
+                if (travel != null)
+                {
+                    travel.TravelTo("training", true);
+                    float loadWait = 0f;
+                    Transform platformTransform = null;
+                    while (loadWait < 12f && platformTransform == null)
+                    {
+                        PushSimStates();
+                        yield return null;
+                        loadWait += Time.unscaledDeltaTime;
+                        foreach (ArcheryChallenge.Levels.LevelController level in FindObjectsByType<ArcheryChallenge.Levels.LevelController>(FindObjectsInactive.Exclude))
+                            if (level.IsTraining && level.transform.Find("Platform") != null)
+                                platformTransform = level.transform.Find("Platform");
+                    }
+                    for (int i = 0; i < 60; i++)
+                    {
+                        PushSimStates();
+                        yield return null;
+                    }
+                    Check(platformTransform != null, "L'arène d'entraînement est chargée");
+                    UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor platformAnchor =
+                        platformTransform != null ? platformTransform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor>() : null;
+                    Check(platformAnchor != null && platformAnchor.colliders.Count > 0, "L'estrade est une ancre de téléportation avec un collider plein");
+                    Transform arrival = platformTransform != null ? platformTransform.parent.Find("TeleportAnchor") : null;
+                    if (platformAnchor != null && arrival != null)
+                    {
+                        // Le point de départ de la visée est la manette gauche ; on cherche l'inclinaison qui fait retomber la courbe sur l'estrade.
+                        Vector3 controllerWorld = origin.transform.TransformPoint(leftState.devicePosition);
+                        Vector3 flat = platformTransform.position - controllerWorld;
+                        flat.y = 0f;
+                        Quaternion yaw = Quaternion.LookRotation(flat.normalized, Vector3.up);
+                        Vector3 beforePlatform = mode.XrRig.transform.position;
+                        bool aimedAtPlatform = false, platformValid = false;
+                        string lastHit = "aucun";
+                        leftState.primary2DAxis = new Vector2(0f, 1f);
+                        for (float pitch = 0f; pitch <= 50f && !aimedAtPlatform; pitch += 3f)
+                        {
+                            Quaternion world = yaw * Quaternion.Euler(-pitch, 0f, 0f);
+                            leftState.deviceRotation = Quaternion.Inverse(origin.transform.rotation) * world;
+                            for (int i = 0; i < 4; i++)
+                            {
+                                PushSimStates();
+                                yield return null;
+                            }
+                            if (teleportRay.gameObject.activeInHierarchy && teleportRay.TryGetCurrent3DRaycastHit(out RaycastHit platformHit))
+                            {
+                                lastHit = platformHit.collider.name + " (" + LayerMask.LayerToName(platformHit.collider.gameObject.layer) + ")";
+                                if (platformHit.collider.transform == platformTransform)
+                                {
+                                    aimedAtPlatform = true;
+                                    platformValid = teleportRay.interactablesHovered.Count > 0;
+                                }
+                            }
+                        }
+                        Check(aimedAtPlatform, $"Le laser peut toucher l'estrade (dernier impact : {lastHit})");
+                        Check(platformValid, "Le laser est valide (plus rouge) sur l'estrade");
+                        leftState.primary2DAxis = Vector2.zero;
+                        for (int i = 0; i < 30; i++)
+                        {
+                            PushSimStates();
+                            yield return null;
+                        }
+                        yield return new WaitForSeconds(0.5f);
+                        Vector3 headAfter = origin.Camera.transform.position;
+                        float toArrival = Vector2.Distance(new Vector2(headAfter.x, headAfter.z), new Vector2(arrival.position.x, arrival.position.z));
+                        bool onPlatform = Mathf.Abs(headAfter.x - platformTransform.position.x) < 3f && Mathf.Abs(headAfter.z - platformTransform.position.z) < 2.2f;
+                        Check(onPlatform, $"Relâcher le stick : le joueur est sur l'estrade (tête à {toArrival:0.0} m du point d'arrivée, de {beforePlatform} à {mode.XrRig.transform.position})");
+                        Check(Vector3.Dot(Vector3.ProjectOnPlane(origin.Camera.transform.forward, Vector3.up).normalized, arrival.forward) > 0.7f, "Il regarde vers les cibles");
+                    }
+                    leftState.primary2DAxis = Vector2.zero;
+                    leftState.deviceRotation = Quaternion.identity;
+                    mode.TeleportToSpawn("camp");
+                    for (int i = 0; i < 20; i++)
+                    {
+                        PushSimStates();
+                        yield return null;
+                    }
+                }
+            }
             if (comfort != null)
             {
                 comfort.Data.continuousMove = true;

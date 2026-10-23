@@ -606,6 +606,39 @@ namespace ArcheryChallenge.Tests.EditMode
         }
 
         [Test]
+        public void ArenaPlatformIsATeleportAnchorThatTheLaserCanHit()
+        {
+            // Le laser ignore les colliders « trigger » : l'ancre d'origine (petite boîte trigger) était invisible, donc impossible de se
+            // téléporter sur l'estrade. L'estrade entière doit être l'ancre, avec un collider plein.
+            GameObject root = new GameObject("ArenaRoot_Test");
+            try
+            {
+                GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                platform.name = "Platform";
+                platform.transform.SetParent(root.transform, false);
+                GameObject arrival = new GameObject("TeleportAnchor");
+                arrival.transform.SetParent(root.transform, false);
+                arrival.transform.localPosition = new Vector3(0f, 0.3f, -0.5f);
+                arrival.AddComponent<BoxCollider>().isTrigger = true;
+                arrival.AddComponent<UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor>();
+
+                var anchor = ArcheryChallenge.Levels.ArenaTeleportSurface.Ensure(root.transform);
+                Assert.IsNotNull(anchor, "l'estrade devient une ancre de téléportation");
+                Assert.AreSame(platform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor>(), anchor);
+                Assert.AreSame(arrival.transform, anchor.teleportAnchorTransform, "le joueur arrive au point d'arrivée");
+                Assert.IsFalse(platform.GetComponent<Collider>().isTrigger, "collider plein : le laser peut le toucher");
+                Assert.IsNull(arrival.GetComponent<UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor>(), "l'ancienne ancre trigger est retirée");
+
+                Assert.AreSame(anchor, ArcheryChallenge.Levels.ArenaTeleportSurface.Ensure(root.transform), "idempotent");
+                Assert.AreEqual(1, platform.GetComponents<UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation.TeleportationAnchor>().Length);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        [Test]
         public void SprintIsTheDefaultWalkingMode()
         {
             // Allure rapide par défaut en VR (4 m/s) ; au clavier/souris, Maj ralentit (cases « Run By Default »).

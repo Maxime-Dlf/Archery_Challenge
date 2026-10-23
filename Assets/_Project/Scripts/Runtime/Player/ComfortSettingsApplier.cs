@@ -10,10 +10,17 @@
 // Le basculement passe par « Smooth Motion Enabled » du ControllerInputActionManager de la manette gauche (Starter Assets de XRI), qui
 // active l'une ou l'autre des actions d'entrée. Le stick droit garde la rotation par pas (et sa propre téléportation).
 // Les réglages sont relus à chaque changement (GameEvents.SettingsChanged) et au démarrage.
+//
+// LASER DE TÉLÉPORTATION : le « Teleport Interactor » des Starter Assets ne lance son rayon physique que sur les calques Default, UI et 31.
+// Or le terrain du monde est sur le calque « Environment » : le rayon ne le touchait jamais, le laser restait rouge (cible invalide) et
+// aucune téléportation n'avait lieu. Au démarrage, le masque du rayon reçoit donc « Environment » (terrain, décors : le rayon s'arrête
+// dessus) et « Teleport » (plateformes d'arène) ; la zone de téléportation du terrain et les ancres des arènes, elles, décident
+// seulement si le point visé est valide (vert) ou non (rouge).
 
 using ArcheryChallenge.Core;
 using ArcheryChallenge.Save;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Comfort;
@@ -42,6 +49,25 @@ namespace ArcheryChallenge.Player
                     leftController = manager;
             Transform offset = transform.Find("Camera Offset");
             cameraOffset = offset;
+            ConfigureTeleportRays();
+        }
+
+        /// <summary>Calques que le laser de téléportation doit pouvoir toucher (en plus de ceux du prefab).</summary>
+        private static readonly string[] TeleportRayLayers = { "Environment", "Teleport" };
+
+        /// <summary>Ajoute les calques du monde au masque du rayon de chaque « Teleport Interactor » (voir l'en-tête).</summary>
+        public void ConfigureTeleportRays()
+        {
+            int extra = 0;
+            foreach (string layerName in TeleportRayLayers)
+            {
+                int layer = LayerMask.NameToLayer(layerName);
+                if (layer >= 0)
+                    extra |= 1 << layer;
+            }
+            foreach (XRRayInteractor ray in GetComponentsInChildren<XRRayInteractor>(true))
+                if (ray.name.Contains("Teleport"))
+                    ray.raycastMask = ray.raycastMask.value | extra;
         }
 
         private void OnEnable()

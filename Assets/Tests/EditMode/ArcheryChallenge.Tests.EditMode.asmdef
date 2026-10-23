@@ -5,6 +5,7 @@
         "ArcheryChallenge.Runtime",
         "ArcheryChallenge.Editor",
         "Unity.TextMeshPro",
+        "Unity.XR.Interaction.Toolkit",
         "UnityEngine.UI",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
