@@ -285,7 +285,6 @@ namespace ArcheryChallenge.Levels
                 score.AcceptShots = true;
             }
             ArrowAllowance.SetUnlimited();
-            TrajectoryPreview.ForceShow = true;
 
             EquipmentService equipment = Services.Get<EquipmentService>();
             if (equipment != null)
@@ -304,7 +303,6 @@ namespace ArcheryChallenge.Levels
 
         private void EndTraining()
         {
-            TrajectoryPreview.ForceShow = false;
             EquipmentService equipment = Services.Get<EquipmentService>();
             if (equipment != null)
             {

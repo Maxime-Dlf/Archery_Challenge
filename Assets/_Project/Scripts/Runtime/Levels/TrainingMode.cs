@@ -4,7 +4,7 @@
 // RÉGLAGES : « Stats Panel » ← le prefab TrainingPanel placé sur BriefingAnchor ; « Level » ← Level_Training.
 //
 // L'entraînement ne compte pas pour la progression : flèches et temps illimités, tout l'équipement
-// utilisable (verrous ignorés), vent réglable à la main, ligne de trajectoire toujours affichée.
+// utilisable (verrous ignorés), vent réglable à la main ; la ligne de trajectoire suit la difficulté choisie (Facile seulement).
 // Ce composant collecte les statistiques du dernier tir (points, distance, vitesse, tension) et les
 // impacts du mini-blason, et expose les actions des boutons du panneau.
 

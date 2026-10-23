@@ -639,6 +639,18 @@ namespace ArcheryChallenge.Tests.EditMode
         }
 
         [Test]
+        public void OnlyEasyShowsThePredictedArrowPath()
+        {
+            // La ligne de trajectoire prévue est réservée au mode Facile (le réticule de visée VR, lui, est affiché partout).
+            foreach (var (name, expected) in new[] { ("Easy", true), ("Normal", false), ("Hard", false) })
+            {
+                var profile = UnityEditor.AssetDatabase.LoadAssetAtPath<ArcheryChallenge.Levels.DifficultyProfile>($"Assets/_Project/Data/Difficulty/Difficulty_{name}.asset");
+                Assert.IsNotNull(profile, name);
+                Assert.AreEqual(expected, profile.showTrajectory, "trajectoire prévue en " + name);
+            }
+        }
+
+        [Test]
         public void SprintIsTheDefaultWalkingMode()
         {
             // Allure rapide par défaut en VR (4 m/s) ; au clavier/souris, Maj ralentit (cases « Run By Default »).

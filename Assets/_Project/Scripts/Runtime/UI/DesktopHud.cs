@@ -181,6 +181,10 @@ namespace ArcheryChallenge.UI
                 return;
             AimSway sway = Services.Get<AimSway>();
             PlayerModeService mode = Services.Get<PlayerModeService>();
+            // Avec le rig VR simulé (F2), c'est le réticule 3D de l'arc (AimReticle) qui sert de visée, comme en casque : pas de doublon.
+            bool screenCrosshair = mode == null || mode.Mode != PlayerMode.Simulator;
+            if (crosshair.gameObject.activeSelf != screenCrosshair)
+                crosshair.gameObject.SetActive(screenCrosshair);
             Camera cam = mode != null && mode.ActiveHead != null ? mode.ActiveHead.GetComponent<Camera>() : null;
             if (sway == null || cam == null || !sway.IsActive || canvas == null)
             {

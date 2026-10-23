@@ -360,6 +360,13 @@ namespace ArcheryChallenge.Core
             Services.Get<SettingsService>().SetDifficulty(GameDifficulty.Easy);
             ArrowAllowance.SetUnlimited();
 
+            // Le jeu démarre en VR quand un runtime XR est disponible (casque ou Link) : le scénario part toujours du clavier/souris.
+            if (mode.Mode != PlayerMode.Desktop)
+            {
+                mode.SetMode(PlayerMode.Desktop);
+                yield return new WaitForSeconds(0.5f);
+            }
+
             // Bascule vers le rig VR piloté par le simulateur (touche F2 en jeu).
             mode.ToggleSimulator();
             // Ce scénario place lui-même les mains : le pilote clavier/souris du rig simulé ne doit pas les déplacer.
@@ -400,17 +407,20 @@ namespace ArcheryChallenge.Core
                 if (d < best) { best = d; target = t; }
             }
 
-            // 1) Saisie de l'arc par la main gauche (sélection XRI réelle).
-            Transform left = xr.GetHand(Handedness.Left);
-            Transform right = xr.GetHand(Handedness.Right);
+            // 1) Saisie de l'arc par la main d'arc du réglage (droite par défaut ; sélection XRI réelle).
+            SettingsService handSettings = Services.Get<SettingsService>();
+            Handedness bowSide = handSettings.BowSide;
+            Handedness freeSide = handSettings.ArrowSide;
+            Transform left = xr.GetHand(bowSide);       // main d'arc
+            Transform right = xr.GetHand(freeSide);     // main de corde (flèches)
             left.position = bow.transform.position;
             UnityEngine.XR.Interaction.Toolkit.XRInteractionManager manager = FindAnyObjectByType<UnityEngine.XR.Interaction.Toolkit.XRInteractionManager>();
             UnityEngine.XR.Interaction.Toolkit.Interactors.NearFarInteractor leftInteractor = left.GetComponentInChildren<UnityEngine.XR.Interaction.Toolkit.Interactors.NearFarInteractor>(true);
-            Check(manager != null && leftInteractor != null, "XR Interaction Manager et interacteur de la main gauche présents");
+            Check(manager != null && leftInteractor != null, "XR Interaction Manager et interacteur de la main d'arc présents");
             manager.SelectEnter((UnityEngine.XR.Interaction.Toolkit.Interactors.IXRSelectInteractor)leftInteractor, (UnityEngine.XR.Interaction.Toolkit.Interactables.IXRSelectInteractable)bow.GrabInteractable);
             yield return new WaitForSeconds(0.3f);
             Check(bow.IsHeld, "L'arc est saisi (XR Grab Interactable)");
-            Check(bow.BowHand == Handedness.Left, $"Main d'arc détectée : {bow.BowHand}");
+            Check(bow.BowHand == bowSide, $"Main d'arc détectée : {bow.BowHand}");
 
             // Visée : la manette gauche regarde la cible, légèrement relevée pour la chute.
             Vector3 aimPoint = target != null ? target.Face.Center : xr.Head.position + xr.Head.forward * 20f;
@@ -424,9 +434,9 @@ namespace ArcheryChallenge.Core
             // 2) Flèche au carquois dorsal : main droite dans le dos + Grip.
             BackQuiver quiver = xr.BackQuiver;
             right.position = quiver.transform.position;
-            xr.ForceGrip(Handedness.Right, 1);
+            xr.ForceGrip(freeSide, 1);
             yield return new WaitForSeconds(0.25f);
-            Arrow held = quiver.GetHeldArrow(Handedness.Right);
+            Arrow held = quiver.GetHeldArrow(freeSide);
             Check(held != null, "Main dans le dos + Grip : une flèche apparaît dans la main");
 
             // 3) Encochage : la flèche approche de la corde.
@@ -444,13 +454,33 @@ namespace ArcheryChallenge.Core
             yield return new WaitForSeconds(0.2f);
             Check(bow.Tension > 0.6f, $"La corde est tendue (tension {bow.Tension:P0})");
 
+            // 4b) Réticule de visée en VR : affiché dans TOUTES les difficultés ; la ligne de trajectoire seulement en Facile.
+            AimReticle reticle = bow.GetComponent<AimReticle>();
+            TrajectoryPreview trajectory = bow.GetComponentInChildren<TrajectoryPreview>(true);
+            LineRenderer trajectoryLine = trajectory != null ? trajectory.GetComponent<LineRenderer>() : null;
+            SettingsService settingsService = Services.Get<SettingsService>();
+            GameDifficulty originalDifficulty = settingsService.Difficulty;
+            Check(reticle != null, "L'arc porte un réticule de visée (AimReticle)");
+            foreach (GameDifficulty difficulty in new[] { GameDifficulty.Easy, GameDifficulty.Normal, GameDifficulty.Hard })
+            {
+                settingsService.SetDifficulty(difficulty);
+                yield return new WaitForSeconds(0.3f);
+                Vector3 toReticle = reticle != null ? reticle.Position - bow.NockedArrow.Tip.position : Vector3.zero;
+                bool inFront = reticle != null && reticle.IsVisible && Vector3.Angle(toReticle, bow.GetShotDirection()) < 3f;
+                Check(inFront, $"{difficulty} : le réticule est affiché dans l'axe de tir ({(reticle != null ? Vector3.Distance(reticle.Position, bow.NockedArrow.Tip.position) : 0f):0.0} m)");
+                bool lineShown = trajectoryLine != null && trajectoryLine.positionCount > 1;
+                Check(lineShown == (difficulty == GameDifficulty.Easy), $"{difficulty} : ligne de trajectoire {(lineShown ? "affichée" : "masquée")} ({(difficulty == GameDifficulty.Easy ? "attendue" : "non attendue")})");
+            }
+            settingsService.SetDifficulty(originalDifficulty);
+            yield return new WaitForSeconds(0.2f);
+
             // 5) Relâchement : le Grip est lâché, la flèche part et se plante.
             int shotsBefore = Services.Get<ScoreService>().ArrowsShot;
             bool impact = false;
             ArrowImpactInfo info = default;
             void OnImpact(ArrowImpactInfo i) { impact = true; info = i; }
             GameEvents.ArrowImpacted += OnImpact;
-            xr.ForceGrip(Handedness.Right, 0);
+            xr.ForceGrip(freeSide, 0);
             yield return new WaitForSeconds(0.2f);
             Check(Arrow.FlyingCount > 0 || impact, "Relâcher le Grip : la flèche part");
             float wait = 0f;
@@ -465,7 +495,7 @@ namespace ArcheryChallenge.Core
             yield return new WaitForSeconds(1.2f);
             Check(!bow.IsHeld && bow.transform.parent == xr.BowHolster.transform, "Arc lâché : il retourne dans l'étui d'épaule");
 
-            xr.ForceGrip(Handedness.Right, -1);
+            xr.ForceGrip(freeSide, -1);
             foreach (Behaviour b in xr.GetComponentsInChildren<Behaviour>(true))
                 if (b != null && b.GetType().Name == "TrackedPoseDriver")
                     b.enabled = true;

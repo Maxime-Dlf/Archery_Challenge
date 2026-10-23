@@ -6,7 +6,8 @@
 //
 // La ligne est calculée avec la MÊME physique que la flèche (gravité, traînée) pour la tension
 // actuelle : elle s'affiche seulement quand la corde est tendue avec une flèche encochée, et
-// seulement si la difficulté l'autorise (« Show Trajectory ») ou si le mode entraînement la force.
+// seulement en difficulté FACILE (« Show Trajectory » du profil de difficulté), y compris à l'entraînement.
+// Le réticule de visée, lui, est affiché dans toutes les difficultés (voir AimReticle).
 // Le vent n'est volontairement pas inclus (c'est ce qui rend la difficulté plus haute plus réaliste).
 
 using ArcheryChallenge.Core;
@@ -25,9 +26,6 @@ namespace ArcheryChallenge.Archery
         [SerializeField, Min(0.01f)] private float timeStep = 0.05f;
 
         private LineRenderer line;
-
-        /// <summary>Quand vrai, la ligne est affichée quelle que soit la difficulté (entraînement).</summary>
-        public static bool ForceShow { get; set; }
 
         private void Awake()
         {
@@ -50,7 +48,7 @@ namespace ArcheryChallenge.Archery
                 return;
 
             DifficultyApplier applier = Services.Get<DifficultyApplier>();
-            bool allowed = ForceShow || (applier != null && applier.Current != null && applier.Current.showTrajectory);
+            bool allowed = applier != null && applier.Current != null && applier.Current.showTrajectory;
             Arrow arrow = bow.NockedArrow;
             if (!allowed || arrow == null || bow.Tension < 0.05f)
             {

@@ -12,6 +12,7 @@
 //   ├── String      LineRenderer + BowStringRenderer + BowString
 //   ├── NockZone    Sphere Collider trigger + NockZone       (Layer ArrowZone)
 //   ├── Trajectory  LineRenderer + TrajectoryPreview
+//   (+ AimReticle, ajouté tout seul à la racine par Awake : réticule de visée en VR)
 //   └── DesktopViewAnchor
 //
 // RÔLES : ce script est le « cerveau » de l'arc. Il ne sait PAS d'où vient l'ordre de tendre
@@ -123,6 +124,9 @@ namespace ArcheryChallenge.Archery
         private void Awake()
         {
             body = GetComponent<Rigidbody>();
+            // Réticule de visée en VR : ajouté ici pour que tous les arcs en aient un sans régénérer leurs prefabs.
+            if (GetComponent<AimReticle>() == null)
+                gameObject.AddComponent<AimReticle>();
             if (grabInteractable == null)
                 grabInteractable = GetComponent<XRGrabInteractable>();
             // Une seule main à la fois : la main libre qui approche de la corde ne doit pas « voler » l'arc.
