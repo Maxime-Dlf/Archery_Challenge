@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b784bdef22dd4d439765c8b4055a8fa, type: 3}
+  m_Name: Level_01
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Levels.LevelDefinition
+  levelId: arena_01
+  displayName: "La Clairi\xE8re"
+  briefing: "Trois cibles fixes dans une clairi\xE8re fleurie. Marquez 45 points
+    pour r\xE9ussir."
+  order: 1
+  isTraining: 0
+  sceneName: Arena_01
+  spawnId: arena_01
+  timeSeconds: 90
+  arrows: 12
+  starThresholds: 2d0000003f00000051000000
+  starsToPass: 1
+  windMultiplier: 1
+  timeBonusPerSecond: 1
+  requiredLevelId: 
+  rewards:
+  - itemId: bow_hunter
+    minStars: 0

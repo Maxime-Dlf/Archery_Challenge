@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569e8229f76671b44b668179eb34bbf4, type: 3}
+  m_Name: Target_Penalty
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Targets.TargetDefinition
+  ringRadii:
+  - 0.058
+  - 0.116
+  - 0.174
+  - 0.232
+  - 0.29
+  - 0.348
+  - 0.406
+  - 0.464
+  - 0.522
+  - 0.58
+  xRadius: 0.029
+  isPenalty: 1
+  penaltyPoints: 15
+  penaltyRadius: 0.55

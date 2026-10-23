@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b784bdef22dd4d439765c8b4055a8fa, type: 3}
+  m_Name: Level_05
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Levels.LevelDefinition
+  levelId: arena_05
+  displayName: Le Tournoi
+  briefing: "La finale en trois vagues. \xC9vitez les boucliers rouges ! Il faut
+    2 \xE9toiles pour \xEAtre sacr\xE9 champion."
+  order: 5
+  isTraining: 0
+  sceneName: Arena_05
+  spawnId: arena_05
+  timeSeconds: 60
+  arrows: 20
+  starThresholds: 5a0000007e000000a2000000
+  starsToPass: 2
+  windMultiplier: 1.5
+  timeBonusPerSecond: 1
+  requiredLevelId: arena_04
+  rewards:
+  - itemId: bow_royal
+    minStars: 0
+  - itemId: trophy
+    minStars: 0
+  - itemId: trophy_gold
+    minStars: 3

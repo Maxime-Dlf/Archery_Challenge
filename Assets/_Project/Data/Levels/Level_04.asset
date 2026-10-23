@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b784bdef22dd4d439765c8b4055a8fa, type: 3}
+  m_Name: Level_04
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Levels.LevelDefinition
+  levelId: arena_04
+  displayName: Le Ravin
+  briefing: "Cibles en hauteur et au fond du ravin, vent fort. Il faut 2 \xE9toiles
+    pour passer."
+  order: 4
+  isTraining: 0
+  sceneName: Arena_04
+  spawnId: arena_04
+  timeSeconds: 75
+  arrows: 15
+  starThresholds: 440000005f0000007a000000
+  starsToPass: 2
+  windMultiplier: 1.25
+  timeBonusPerSecond: 1
+  requiredLevelId: arena_03
+  rewards:
+  - itemId: arrow_carbon
+    minStars: 0
+  - itemId: bow_sylvan
+    minStars: 0
+  - itemId: bow_thorn
+    minStars: 3

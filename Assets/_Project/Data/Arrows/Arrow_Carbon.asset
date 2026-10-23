@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c735779eb24322243be49c589e07cfa6, type: 3}
+  m_Name: Arrow_Carbon
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.ArrowDefinition
+  id: arrow_carbon
+  displayName: "Fl\xE8che en carbone"
+  description: "La plus rapide, presque insensible au vent. R\xE9compense du Ravin."
+  tier: 3
+  prefab: {fileID: 729292633010058764, guid: d477b0be840bf5a42ad7ec4f219347fc, type: 3}
+  speedMultiplier: 1.3
+  drag: 0.01
+  windSensitivity: 0.6
