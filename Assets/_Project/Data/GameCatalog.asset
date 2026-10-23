@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d05baec7239d2a4596c17ffdc600272, type: 3}
+  m_Name: GameCatalog
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.GameCatalog
+  bows:
+  - {fileID: 11400000, guid: b33b1fce09772d44f9e3d8cefe65ed41, type: 2}
+  - {fileID: 11400000, guid: 12654e0c182689045bb7eefdb08b1a38, type: 2}
+  - {fileID: 11400000, guid: 3d464956ed3a276479c196f2b38935db, type: 2}
+  - {fileID: 11400000, guid: 600ef03951bf715449d4e396d1396593, type: 2}
+  - {fileID: 11400000, guid: 30b602fb256ac964d90a72c10cbdf3d2, type: 2}
+  - {fileID: 11400000, guid: 7062cadaff43ac7468cd2f3c0fe16ffb, type: 2}
+  arrows:
+  - {fileID: 11400000, guid: 6dfaf761d25cdd5479806a8bfcb2b408, type: 2}
+  - {fileID: 11400000, guid: 161d776fdcf14854dba57c9228a300bb, type: 2}
+  - {fileID: 11400000, guid: a009131a763fa8c4d8728a8ea9bdf027, type: 2}
+  levels:
+  - {fileID: 11400000, guid: 07b29449e15f87045adef882e9064008, type: 2}
+  - {fileID: 11400000, guid: aeb2e3b830be3b6449e2a21020d8dab5, type: 2}
+  - {fileID: 11400000, guid: 5e8317e3c4d74144385db0714086e3a0, type: 2}
+  - {fileID: 11400000, guid: 90d6239ade166a247b0d0c0f5bdb45f1, type: 2}
+  - {fileID: 11400000, guid: fbadd7eaeb59ef24f8dd8baaf8dc090b, type: 2}
+  - {fileID: 11400000, guid: dd1ca2e3374823a46bd0749089579495, type: 2}
+  difficulties:
+  - {fileID: 11400000, guid: 4d84613127fd55e4493a97669aa64f73, type: 2}
+  - {fileID: 11400000, guid: 7a06991570cfb1e48b59b41c4455d0d1, type: 2}
+  - {fileID: 11400000, guid: d65933ed941faf5459fb6d00b6d1a1f1, type: 2}
+  defaultBowId: bow_apprentice
+  defaultArrowId: arrow_wood

@@ -1,0 +1,428 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1926776417546441979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8891977340867079868}
+  - component: {fileID: 5890216466043684139}
+  - component: {fileID: 4803667776292636931}
+  - component: {fileID: 7165616981207575157}
+  - component: {fileID: 8910794160932843444}
+  - component: {fileID: 2128689368913768373}
+  - component: {fileID: 5884158819410754560}
+  - component: {fileID: 5791561322909334694}
+  - component: {fileID: 6618213711188885063}
+  - component: {fileID: 1867665095158242261}
+  - component: {fileID: 2555890629363556498}
+  - component: {fileID: 1504882571587213507}
+  - component: {fileID: 2702097120456687950}
+  - component: {fileID: 4782063009662002096}
+  - component: {fileID: 6047466110509692512}
+  - component: {fileID: 6104101049890544469}
+  - component: {fileID: 7736011220126661002}
+  - component: {fileID: 6249653536652134774}
+  - component: {fileID: 4048040628832563367}
+  - component: {fileID: 3029686558429484625}
+  - component: {fileID: 5573645359795897283}
+  - component: {fileID: 776151586399701285}
+  - component: {fileID: 2572266364466374328}
+  - component: {fileID: 7956429937019572554}
+  - component: {fileID: 7993066867286292702}
+  m_Layer: 0
+  m_Name: Systems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8891977340867079868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5890216466043684139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075a4b9313a52334fb316250038f694c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.GameBootstrap
+  catalog: {fileID: 11400000, guid: 81f45fd77b8b0b242ac7738eaf62497c, type: 2}
+  worldScene: World
+  defaultSpawnId: camp
+  spawnTimeout: 10
+--- !u!114 &4803667776292636931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce37006c37012d4c8f4f689424a6bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.SceneService
+--- !u!114 &7165616981207575157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432342aa17c3b244488d0a4afbf6e073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.FadeService
+  fadeMaterial: {fileID: 2100000, guid: fea8d266c63a5a14186ed5f2383c51e6, type: 2}
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+  defaultDuration: 0.35
+  startOpaque: 1
+--- !u!114 &8910794160932843444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5b1a0a7a81cee419e9fa6d6ba3fefc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.PlayerModeService
+  xrRig: {fileID: 0}
+  desktopRig: {fileID: 0}
+  simulator: {fileID: 0}
+  startupMode: 0
+  useStockSimulator: 0
+--- !u!114 &2128689368913768373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbf2a219d75a53469531b628726127c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.DevShortcuts
+--- !u!114 &5884158819410754560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37f431600805bf47bcc499128ec484d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Core.PlatformQualitySettings
+  questTreeDistance: 100
+  questDetailDistance: 25
+  questDetailDensity: 0.5
+  questRenderScale: 1
+  pcTreeDistance: 150
+  pcDetailDistance: 40
+--- !u!114 &5791561322909334694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190cca4605bc7ff499b95e02b0fdbe15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Save.SettingsService
+--- !u!114 &6618213711188885063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29feb4d7193fe14c9749c31b5f074ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Save.ProfileService
+--- !u!114 &1867665095158242261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d874cfe4810d0904aa5355a29a2c03df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Save.SaveSlotService
+  autosaveInterval: 60
+--- !u!114 &2555890629363556498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad272a3748841a46be7a80d8eb5b301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Save.LeaderboardService
+--- !u!114 &1504882571587213507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e0a29976746b34dbc3507ef5111954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Progression.EquipmentService
+--- !u!114 &2702097120456687950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3dbd517ea4e5c4b92cf090ebcf44d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Progression.UnlockService
+--- !u!114 &4782063009662002096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec768c4636b78684a8bf02e4359a9e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Targets.ScoreService
+--- !u!114 &6047466110509692512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde3795fb09f7394293687d87adaf51d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.WindService
+--- !u!114 &6104101049890544469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c40d8a221b675242be4ccb78faed1e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.HapticsService
+  enabledInGame: 1
+  drawIntensity: 0.45
+--- !u!114 &7736011220126661002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f668a169a513d449854a9b47e640ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.ArrowPool
+  prewarmPerType: 0
+--- !u!114 &6249653536652134774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65e2c62c8ddbca41a217463e6d2143a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Levels.DifficultyApplier
+--- !u!114 &4048040628832563367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12066f2c1664904498f19b6e0080a72f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.World.TimeOfDayService
+  lightRadius: 100
+  profile: {fileID: 11400000, guid: 2ddf5ec0b29ba554abee0b4a228724db, type: 2}
+--- !u!114 &3029686558429484625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e32e06b2e56a5f48abeaa30817b0f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.World.FastTravelService
+--- !u!114 &5573645359795897283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb23a765e412ed40ac18a9fc08eb842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Audio.AudioService
+  banks:
+  - {fileID: 11400000, guid: 891efa6d6d80f9d4f81db60ff20938d0, type: 2}
+  - {fileID: 11400000, guid: 84fbd121bc5c41448a22ae81882e89c8, type: 2}
+  - {fileID: 11400000, guid: 447ac195397c6074191f74849ca32d08, type: 2}
+  - {fileID: 11400000, guid: d24a1bd751d65f7468a88ded7c9ab2a9, type: 2}
+  - {fileID: 11400000, guid: ca1970607776b2640a2999da8ef4c456, type: 2}
+  - {fileID: 11400000, guid: ac53852758a7fb947bb673792acc5b14, type: 2}
+  - {fileID: 11400000, guid: 2ebfa15d948459c4d8b28da854271f02, type: 2}
+  - {fileID: 11400000, guid: d5d70a46d8d54174db89dc25fc5071fa, type: 2}
+  - {fileID: 11400000, guid: a1ce1a440c668fc43a632e7b63631e27, type: 2}
+  - {fileID: 11400000, guid: a3d7162fa296f3e418cc19cd8e6a90f3, type: 2}
+  - {fileID: 11400000, guid: 6b0107b3393f3e448b92e2a745a0d8f1, type: 2}
+  - {fileID: 11400000, guid: aeabcd8c441dbe843802824c331f10fd, type: 2}
+  - {fileID: 11400000, guid: 4c7f59d0dbd2c55439a4d7a307d394ba, type: 2}
+  - {fileID: 11400000, guid: 5f76982086c4c7446b6952fc9dfd3cd1, type: 2}
+  - {fileID: 11400000, guid: 68e71b2fa4e98c64ba67c25c9b8d73b4, type: 2}
+  - {fileID: 11400000, guid: e509122a464da974d9754fd19568c3ab, type: 2}
+  - {fileID: 11400000, guid: 26aa12f525f1c8d48a2034830ad9caad, type: 2}
+  - {fileID: 11400000, guid: d55f05c126475da4a9b30aace306b635, type: 2}
+  - {fileID: 11400000, guid: 6b674034212a26f46bb4e3d578e1ea25, type: 2}
+  - {fileID: 11400000, guid: 0697b4a7b0473d948a6a25955824b50f, type: 2}
+  - {fileID: 11400000, guid: d45026f8428740748925734d3afd290c, type: 2}
+  - {fileID: 11400000, guid: 352c246b49672124f9189ccd406b85d0, type: 2}
+  - {fileID: 11400000, guid: d87394c248887cf48bfbfbbe37e2d13f, type: 2}
+  - {fileID: 11400000, guid: 55af64e8fdf34944fb8ca818eb74163c, type: 2}
+  - {fileID: 11400000, guid: 2cd87070e603afa4481802b3e289d70c, type: 2}
+  - {fileID: 11400000, guid: 2bb5652b87aad5d4590665f93020f476, type: 2}
+  - {fileID: 11400000, guid: 9e463f75459d3f34aaf5538bb535da40, type: 2}
+  - {fileID: 11400000, guid: de3741ec621bff1469381e13c50fb816, type: 2}
+  - {fileID: 11400000, guid: 79cba05d0520b5345a8603d76edf9c54, type: 2}
+  - {fileID: 11400000, guid: e3abd83127903c445bbd44b2667207d7, type: 2}
+  poolSize: 20
+--- !u!114 &776151586399701285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c5146ca201dc54380dff1dc7a03160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.VFX.ImpactFeedback
+  entries:
+  - surface: 1
+    effect: {fileID: 1940474593407645073, guid: b8374811e9bb10e43a123f92cc8e93b6, type: 3}
+  - surface: 2
+    effect: {fileID: 3589764900051379552, guid: c234c28e39c031f4da6b706e60477e66, type: 3}
+  - surface: 0
+    effect: {fileID: 9124218793621724206, guid: 24d590e07e5b7ac4dbd025c56879bb1b, type: 3}
+  - surface: 3
+    effect: {fileID: 1994501803627097497, guid: b958c170d4f979b4f945b2708d2df621, type: 3}
+  - surface: 4
+    effect: {fileID: 683629697222385897, guid: fc33964a24239174daf3d2197f0819ee, type: 3}
+  - surface: 5
+    effect: {fileID: 1994501803627097497, guid: b958c170d4f979b4f945b2708d2df621, type: 3}
+  bullseyeEffect: {fileID: 7382453952585834948, guid: 1d8f58a2240940344bb0f868eb37dc4d, type: 3}
+  unlockEffect: {fileID: 6483412657340624539, guid: 7afdc1e8a469e7f4f8dc5313e47df19a, type: 3}
+  monsterHitEffect: {fileID: 683629697222385897, guid: fc33964a24239174daf3d2197f0819ee, type: 3}
+  monsterDieEffect: {fileID: 8993085489328376273, guid: 3b5bb1af27073894a98799375b050620, type: 3}
+  gateDustEffect: {fileID: 1387102824648127789, guid: c9860c6fe3dc94046ac90f1fb220917d, type: 3}
+--- !u!114 &2572266364466374328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f61588e76a66842857dae5d6a90071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Player.PlayerHealth
+  invulnerabilitySeconds: 1
+--- !u!114 &7956429937019572554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4baf8a9f66f5e584cac64100c813cee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.UI.ToastService
+  displaySeconds: 3
+  maxQueue: 6
+--- !u!114 &7993066867286292702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926776417546441979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1f43dffe054964c9451737e7898892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.AimSway
+  baseAmplitude: 0.25
+  windFactor: 0.06
+  fatigueSeconds: 2.5
+  fatigueMaxSeconds: 10
+  fullDrawTension: 0.97
