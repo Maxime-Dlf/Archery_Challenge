@@ -173,6 +173,15 @@ namespace ArcheryChallenge.Core
             Check(true, $"Banc solide : {benchSolid}");
             Check(true, $"Prêt : joueur en {start}, Character Controller activé {body.enabled}, au sol {body.isGrounded}, hauteur {body.height:0.00}");
 
+            // Le stick gauche téléporte par défaut : ce test vérifie la marche, donc l'option « Déplacement continu » est activée.
+            ArcheryChallenge.Save.SettingsService comfort = Services.Get<ArcheryChallenge.Save.SettingsService>();
+            if (comfort != null)
+            {
+                comfort.Data.continuousMove = true;
+                comfort.MarkChanged();
+            }
+            yield return null;
+            yield return null;
             pump.LeftStick = new Vector2(0f, 1f);
             StringBuilder log = new StringBuilder();
             float t0 = Time.time;
@@ -188,6 +197,11 @@ namespace ArcheryChallenge.Core
             }
             pump.LeftStick = Vector2.zero;
             float moved = Vector3.Distance(new Vector3(start.x, 0f, start.z), new Vector3(root.position.x, 0f, root.position.z));
+            if (comfort != null)
+            {
+                comfort.Data.continuousMove = false;
+                comfort.MarkChanged();
+            }
             Check(moved > 2f, $"Le joystick gauche déplace le joueur juste après le démarrage ({moved:0.00} m en 2 s ; progression {log}timeScale {Time.timeScale})");
             Finish("Démarrage VR");
         }

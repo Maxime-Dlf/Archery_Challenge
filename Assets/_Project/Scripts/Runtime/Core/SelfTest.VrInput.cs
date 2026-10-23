@@ -1,7 +1,7 @@
 // SelfTest (partie « entrées VR ») : vérifie, sans casque, le rig VR RÉEL (PlayerMode.VR) alimenté par des manettes simulées
 // (XRSimulatedController du XR Interaction Toolkit, mêmes actions « XRI Default Input Actions » que les vraies manettes) :
 //   - les deux manettes apparaissent (XRInputModalityManager) ;
-//   - le joystick gauche déplace le joueur, le joystick droit tourne ;
+//   - le joystick gauche déplace le joueur (option « Déplacement continu » ; par défaut il téléporte), le joystick droit tourne ;
 //   - le rayon d'une manette + la gâchette cliquent sur un bouton d'un écran flottant ;
 //   - la gâchette ou le Grip n'est pas « mangé » par un autre système.
 //
@@ -373,6 +373,20 @@ namespace ArcheryChallenge.Core
                 $"La caméra suit la tête (hauteur {origin.Camera.transform.position.y - mode.XrRig.transform.position.y:0.00} m)");
 
             // --- 2. Déplacement au joystick gauche ---
+            // Par défaut le stick gauche téléporte (laser) ; le test de marche passe en déplacement continu (option Confort), puis revient.
+            ArcheryChallenge.Save.SettingsService comfort = Services.Get<ArcheryChallenge.Save.SettingsService>();
+            UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ControllerInputActionManager leftManager =
+                xr.LeftHand != null ? xr.LeftHand.GetComponentInChildren<UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ControllerInputActionManager>(true) : null;
+            Check(comfort != null && !comfort.Data.continuousMove, "Par défaut, le déplacement continu est désactivé (le stick gauche téléporte)");
+            Check(leftManager != null && !leftManager.smoothMotionEnabled, "Manette gauche : téléportation active, marche continue coupée");
+            if (comfort != null)
+            {
+                comfort.Data.continuousMove = true;
+                comfort.MarkChanged();
+            }
+            yield return null;
+            yield return null;
+            Check(leftManager != null && leftManager.smoothMotionEnabled, "Option « Déplacement continu » : la marche au stick gauche est activée");
             Vector3 before = mode.XrRig.transform.position;
             leftState.primary2DAxis = new Vector2(0f, 1f);
             float t0 = Time.time;
@@ -392,6 +406,13 @@ namespace ArcheryChallenge.Core
             yield return new WaitForSeconds(0.2f);
             float moved = Vector3.Distance(new Vector3(before.x, 0f, before.z), new Vector3(mode.XrRig.transform.position.x, 0f, mode.XrRig.transform.position.z));
             Check(moved > 0.8f && moved < 8f, $"Le joystick gauche déplace le joueur à vitesse normale ({moved:0.00} m en 1,5 s, Time.timeScale = {Time.timeScale}, de {before} à {mode.XrRig.transform.position})");
+            if (comfort != null)
+            {
+                comfort.Data.continuousMove = false;
+                comfort.MarkChanged();
+            }
+            yield return null;
+            Check(leftManager != null && !leftManager.smoothMotionEnabled, "Retour à la téléportation : la marche continue est de nouveau coupée");
 
             // --- 3. Rotation au joystick droit ---
             float yawBefore = mode.XrRig.transform.eulerAngles.y;
