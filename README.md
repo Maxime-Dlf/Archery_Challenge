@@ -3,7 +3,6 @@
 Jeu de tir à l'arc en **réalité virtuelle** pour **Meta Quest 2 et 3**, également **jouable au clavier et à la souris** sur PC.
 Projet de groupe réalisé avec **Unity 6** (6000.5.10f1), URP, OpenXR et XR Interaction Toolkit 3.5.1.
 
-> Projet en cours de développement.
 
 ## Le jeu
 
