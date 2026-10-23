@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e330c680cbc19fa479770ef581f5516c, type: 3}
+  m_Name: Bow_Hunter
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Archery.BowDefinition
+  id: bow_hunter
+  displayName: Arc de chasse
+  description: "Arc de chasse \xE0 bandes color\xE9es : plus rapide et plus pr\xE9cis.
+    R\xE9compense de La Clairi\xE8re."
+  tier: 2
+  prefab: {fileID: 6850252161951254530, guid: ab5f9120dda223e40986bb550d66277a, type: 3}
+  maxSpeed: 42
+  drawLength: 0.6
+  desktopDrawTime: 0.7
+  powerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.6
+      outSlope: 0.6
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.5
+      outSlope: 1.5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
