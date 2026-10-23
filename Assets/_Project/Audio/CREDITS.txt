@@ -1,0 +1,16 @@
+CRÉDITS AUDIO : Archery Challenge
+================================
+
+Sons fournis avec le projet
+- Kenney « RPG Audio » (CC0) : creak, cloth, chop, footstep, door, dropLeather, handleSmallLeather… https://kenney.nl
+- Leohpaz « RPG Essentials SFX Free » : sons de combat, de bonus et d'interface (voir la licence du pack).
+- Unity XR « VR Template » : Button_14_hover, Button_22_click.
+
+Sons générés par le projet (domaine public, créés par code, voir Scripts/Editor/AudioSynth.cs)
+- Gen_BowRelease_*, Gen_ArrowWhoosh_*, Gen_Beep, Gen_Go
+- Ambiances : Gen_ForestDay, Gen_ForestNight, Gen_River, Gen_Campfire, Gen_Crowd
+- Musiques : Gen_MusicCamp, Gen_MusicVictory (cordes pincées, algorithme de Karplus-Strong)
+
+Ces sons générés sont des remplaçants simples : ils peuvent être remplacés par des enregistrements libres
+(Freesound CC0, Pixabay) en changeant seulement les clips des banques de Data/Audio.
+Notez ici titre, auteur, licence et lien de chaque son téléchargé.

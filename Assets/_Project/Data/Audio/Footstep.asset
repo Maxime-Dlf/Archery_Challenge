@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b5cc92a4fe39448bfc770c61017aab, type: 3}
+  m_Name: Footstep
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Audio.SoundBank
+  clips:
+  - {fileID: 8300000, guid: 61d583c4cd1ed614283e1fc8b6b98979, type: 3}
+  - {fileID: 8300000, guid: 6706c2dc68e1cb743a34184e59d2dd0c, type: 3}
+  - {fileID: 8300000, guid: e7680cc1323de51408e29f91eee36afd, type: 3}
+  - {fileID: 8300000, guid: 4770f61d002d565469f4283dfe9b9175, type: 3}
+  - {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
+  volume: 0.6
+  pitchMin: 0.95
+  pitchMax: 1.05
+  category: 0
+  mixerGroup: {fileID: 0}
+  spatial: 1
+  minDistance: 0.5
+  maxDistance: 8
+  loop: 0

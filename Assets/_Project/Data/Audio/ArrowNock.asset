@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b5cc92a4fe39448bfc770c61017aab, type: 3}
+  m_Name: ArrowNock
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Audio.SoundBank
+  clips:
+  - {fileID: 8300000, guid: 663821c8f8fa04b4f84611e827c02c13, type: 3}
+  - {fileID: 8300000, guid: 63ed6db8945dd5c4ca1d4422a2632cbb, type: 3}
+  - {fileID: 8300000, guid: e0c8210d669081642a1f852755658a3b, type: 3}
+  volume: 0.55
+  pitchMin: 0.95
+  pitchMax: 1.05
+  category: 0
+  mixerGroup: {fileID: 0}
+  spatial: 1
+  minDistance: 0.2
+  maxDistance: 5
+  loop: 0

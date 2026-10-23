@@ -1,7 +1,7 @@
 // SelfTest (partie « interface et décors ») : vérifie les écrans flottants, les aides de touches, les panneaux,
 // le râtelier, les drapeaux, le pont et l'absence d'objets démesurés dans les scènes chargées.
 //
-// Lancé par SelfTest.RunInterfaceScenario() en mode Play (menu de test ou RunCommand).
+// Lancé par SelfTest.RunInterfaceScenario() en mode Play (menu de test).
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
 using System.Collections;

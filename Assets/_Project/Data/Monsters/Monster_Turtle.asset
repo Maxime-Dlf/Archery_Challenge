@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abdc1d28d0fbd842a75ea8be230ef78, type: 3}
+  m_Name: Monster_Turtle
+  m_EditorClassIdentifier: ArcheryChallenge.Runtime::ArcheryChallenge.Monsters.MonsterDefinition
+  id: turtle
+  displayName: Tortue
+  maxHealth: 3
+  damage: 4
+  healOnKill: 4
+  walkSpeed: 0.8
+  runSpeed: 1.8
+  senseRadius: 12
+  attackRange: 2
+  attackCooldown: 2
+  canDefend: 1
+  stunDuration: 0.8
